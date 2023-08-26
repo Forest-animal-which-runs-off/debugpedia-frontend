@@ -10,21 +10,17 @@ const fetcher = async (debug: Debug) => {
 export const useCreateDebug = (debug: Debug) => {
   const toast = useToast();
 
-  return useSWRMutation('api/get/debugs', () => fetcher(debug), {
+  return useSWRMutation('api/post/debugs', () => fetcher(debug), {
     onSuccess: () => {
       toast({
         title: 'デバッグの作成に成功しました。',
         status: 'success',
-        duration: 9000,
-        isClosable: true,
       });
     },
     onError: () => {
       toast({
         title: 'デバッグの作成に失敗しました。',
         status: 'error',
-        duration: 9000,
-        isClosable: true,
       });
     },
   });

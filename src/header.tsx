@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 
 export const Header = () => {
   return (
-    <button>
-      <Box backgroundColor='#5aec16' width='full' p={5}>
-        <Link to='/login'>
-          <Image src='.\Group_4.svg' />
-        </Link>
+    <Box as='header' backgroundColor='#5aec16' p={4}>
+      <Box as={Link} display={'block'} width={'fit-content'} to='/login'>
+        <Image src='.\Group_4.svg' />
       </Box>
-    </button>
+    </Box>
   );
 };

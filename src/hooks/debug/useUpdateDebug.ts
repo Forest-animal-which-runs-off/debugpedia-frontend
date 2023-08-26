@@ -1,7 +1,7 @@
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import useSWRMutation from 'swr/mutation';
-import { Debug } from '../types';
+import { Debug } from '../../types';
 
 const fetcher = async (debug: Debug) => {
   await axios.put(`${import.meta.env.VITE_APP_API_URL}/debugs/${debug.id}`, debug);
@@ -17,11 +17,18 @@ export const useUpdateDebug = (debug: Debug) => {
         status: 'success',
       });
     },
-    onError: () => {
-      toast({
-        title: 'デバッグの更新に失敗しました。',
-        status: 'error',
-      });
+    onError: (e) => {
+      if (e instanceof Error) {
+        toast({
+          title: e.message,
+          status: 'error',
+        });
+      } else {
+        toast({
+          title: 'デバッグの更新に失敗しました。',
+          status: 'error',
+        });
+      }
     },
   });
 };

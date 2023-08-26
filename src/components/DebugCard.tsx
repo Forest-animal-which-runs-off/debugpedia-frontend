@@ -1,5 +1,6 @@
 import { Box, Image, Text, Grid, GridItem } from '@chakra-ui/react';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 type Props = {
   id: string;
@@ -18,8 +19,14 @@ export const DebugCard: FC<Props> = (props) => {
     author: props.author,
   };
 
+  const debugCardLink = `/Debug/${debugCard.id}`;
+
   return (
-    <Box bg='white' w='200px' borderRadius='lg' h='240' boxShadow='lg' p={5} color='black'>
+    <Link to={debugCardLink}>
+    <Box bg='white' w='200px' borderRadius='lg' h='240' boxShadow='lg' p={5} color='black'  transition='transform 0.3s ease-in-out' // スケール変化にトランジションを追加
+        _hover={{
+          transform: 'scale(1.1)', // ホバー時のスケール変化
+        }}>
       <Box noOfLines={3} mb='8px' fontWeight='bold'>
         <Text h={83} fontSize='18px'>
           {debugCard.title}
@@ -55,5 +62,6 @@ export const DebugCard: FC<Props> = (props) => {
         </GridItem>
       </Grid>
     </Box>
+    </Link>
   );
 };

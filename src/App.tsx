@@ -1,14 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import { useSignup } from './hooks/user/useSignup';
 
 function App() {
   const [count, setCount] = useState(0);
-  useEffect(() => {
-    useSignup('example@gmail.com', 'pass123', '細見蒼生');
-  }, []);
   return (
     <>
       <div>

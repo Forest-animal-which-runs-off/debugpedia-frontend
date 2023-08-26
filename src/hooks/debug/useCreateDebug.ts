@@ -17,11 +17,18 @@ export const useCreateDebug = (debug: Debug) => {
         status: 'success',
       });
     },
-    onError: () => {
-      toast({
-        title: 'デバッグの作成に失敗しました。',
-        status: 'error',
-      });
+    onError: (e) => {
+      if (e instanceof Error) {
+        toast({
+          title: e.message,
+          status: 'error',
+        });
+      } else {
+        toast({
+          title: 'デバッグの更新に失敗しました。',
+          status: 'error',
+        });
+      }
     },
   });
 };

@@ -11,7 +11,7 @@ const fetcher = async (user: User) => {
   await axios.post(`${import.meta.env.VITE_APP_API_URL}/login`, user);
 };
 
-export const useCreateDebug = (user: User) => {
+export const useLogin = (user: User) => {
   const toast = useToast();
 
   return useSWRMutation('api/post/login', () => fetcher(user), {

@@ -4,7 +4,7 @@ import useSWRMutation from 'swr/mutation';
 import { Debug } from '../types';
 
 const fetcher = async (debug: Debug) => {
-  await axios.put(`${import.meta.env.VITE_APP_API_URL}/debugs`, debug);
+  await axios.put(`${import.meta.env.VITE_APP_API_URL}/debugs/${debug.id}`, debug);
 };
 
 export const useUpdateDebug = (debug: Debug) => {

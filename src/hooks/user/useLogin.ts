@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const useLogin = () => {
+export const useLogin = (email: string, password: string) => {
   const params = {
-    email: 'test@example.com',
-    password: 'test1234',
+    email,
+    password,
   };
   return axios
     .post('${process.env.REACT_APP_API_URL}/login', params)

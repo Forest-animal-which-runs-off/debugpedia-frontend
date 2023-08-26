@@ -8,8 +8,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "lint:fix": "yarn lint --fix",
-    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
-    "conflict": "eslint-config-prettier 'src/**/*.{ts,tsx,js,jsx}'",
+    "format": "prettier --write --ignore-path .gitignore \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "conflict": "eslint-config-prettier \"src/**/*.{ts,tsx,js,jsx}\"",
     "fix": "tsc && yarn conflict && yarn lint && yarn format",
     "prepare": "husky install"
   },

@@ -7,7 +7,7 @@ const fetcher = async (debug: Debug) => {
   await axios.put(`${import.meta.env.VITE_APP_API_URL}/debugs`, debug);
 };
 
-export const useCreateDebug = (debug: Debug) => {
+export const useUpdateDebug = (debug: Debug) => {
   const toast = useToast();
 
   return useSWRMutation('api/put/debugs', () => fetcher(debug), {

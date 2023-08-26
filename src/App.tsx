@@ -1,7 +1,8 @@
-import { Header } from './header';
+import { DebugCard } from './DebugCard';
+import './App.css';
 
 function App() {
-  return <Header />;
+  return <DebugCard />;
 }
 
 export default App;

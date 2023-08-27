@@ -1,12 +1,14 @@
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import useSWR from 'swr';
+import { Debug } from '../../types';
 
 const fetcher = async () => {
-  await axios.get(`${import.meta.env.VITE_APP_API_URL}/debugs`);
+  const res = await axios.get<Debug>(`${import.meta.env.VITE_APP_API_URL}/debugs`);
+  return res.data;
 };
 
-export const useDeleteDebug = () => {
+export const useGetDebugs = () => {
   const toast = useToast();
 
   const { data, error, isLoading } = useSWR('api/get/debugs', () => fetcher(), {

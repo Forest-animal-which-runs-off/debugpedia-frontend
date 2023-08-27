@@ -1,5 +1,6 @@
 import { Button, Center, Flex, Image, Input, Link, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useLogin } from '../../hooks/user/useLogin';
 
 export const Login = () => {
@@ -10,6 +11,9 @@ export const Login = () => {
   const handleSubmit = () => {
     trigger({ email, password });
   };
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+  }, []);
 
   return (
     <Center bg='#5AEC16' h='100vh' w='100vw'>

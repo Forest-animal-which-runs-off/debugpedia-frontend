@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import { ErrorPage } from './error-page.tsx';
+import { DebugCardList } from './routes/debugs/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,11 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <div>login</div>,
+  },
+  {
+    path: '/debugs',
+    element: <DebugCardList />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

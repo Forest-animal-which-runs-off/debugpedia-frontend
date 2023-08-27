@@ -1,35 +1,56 @@
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useSWRMutation from 'swr/mutation';
 
-type User = {
+type Arg = {
   email: string;
   password: string;
 };
 
-const fetcher = async (user: User) => {
-  await axios.post(`${import.meta.env.VITE_APP_API_URL}/login`, user);
+const fetcher = async (_: string, { arg }: { arg: Arg }) => {
+  await axios.post(`${import.meta.env.VITE_APP_API_URL}/login`, arg);
 };
 
-export const useLogin = (user: User) => {
+export const useLogin = () => {
   const toast = useToast();
+  const navigate = useNavigate();
 
-  return useSWRMutation('api/post/login', () => fetcher(user), {
+  const { trigger, isMutating } = useSWRMutation('api/post/login', fetcher, {
     onSuccess: () => {
+      toast.closeAll();
       toast({
         title: 'ログインに成功しました。',
         status: 'success',
-        duration: 9000,
-        isClosable: true,
+        position: 'top-right',
+        duration: 2000,
       });
+      navigate('/debugs');
     },
     onError: () => {
+      toast.closeAll();
       toast({
         title: 'ログインに失敗しました。',
         status: 'error',
-        duration: 9000,
-        isClosable: true,
+        position: 'top-right',
       });
     },
   });
+
+  useEffect(() => {
+    if (isMutating) {
+      toast({
+        title: 'ログイン中...',
+        status: 'info',
+        duration: null,
+        isClosable: false,
+        position: 'top-right',
+      });
+    }
+  }, [isMutating]);
+
+  return { trigger, isMutating };
 };
+
+// "ID":14,"Email":"example@gmail.com","Name":"佐藤 仁"

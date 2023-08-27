@@ -45,9 +45,8 @@ function TechInput(props: Props) {
           </Button>
         )}
       </Stack>
-      
 
-      <Flex direction={props.isEdit ? "column":"row" } align='flex-start' justify='flex-start'>
+      <Flex direction={props.isEdit ? 'column' : 'row'} align='flex-start' justify='flex-start'>
         {techs.map((tech, index) => (
           <HStack key={index} align='center' width='6%'>
             {props.isEdit ? (

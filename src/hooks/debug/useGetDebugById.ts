@@ -1,16 +1,18 @@
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import useSWR from 'swr';
+import { Debug } from '../../types';
 
 type Arg = {
   debugId: string;
 };
 
 const fetcher = async ({ arg }: { arg: Arg }) => {
-  await axios.get(`${import.meta.env.VITE_APP_API_URL}/debugs/${arg.debugId}`);
+  const res = await axios.get<Debug>(`${import.meta.env.VITE_APP_API_URL}/debugs/${arg.debugId}`);
+  return res.data;
 };
 
-export const useDeleteDebug = (debugId: string) => {
+export const useGetDebugs = (debugId: string) => {
   const toast = useToast();
 
   const { data, error, isLoading } = useSWR(

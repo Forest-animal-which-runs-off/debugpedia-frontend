@@ -12,7 +12,7 @@ const fetcher = async ({ arg }: { arg: Arg }) => {
   return res.data;
 };
 
-export const useGetDebugs = (debugId: string) => {
+export const useGetDebugById = (debugId: string) => {
   const toast = useToast();
 
   const { data, error, isLoading } = useSWR(

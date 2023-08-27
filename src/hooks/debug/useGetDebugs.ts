@@ -8,7 +8,7 @@ const fetcher = async () => {
   return res.data;
 };
 
-export const useGetDebugById = () => {
+export const useGetDebugs = () => {
   const toast = useToast();
 
   const { data, error, isLoading } = useSWR('api/get/debugs', () => fetcher(), {

@@ -1,11 +1,15 @@
 import { Button, Center, Flex, Image, Input, Link, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useLogin } from '../../hooks/user/useLogin';
 
 export const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleSubmit = () => {};
+  const { trigger } = useLogin();
+  const handleSubmit = () => {
+    trigger({ email, password });
+  };
 
   return (
     <Center bg='#5AEC16' h='100vh' w='100vw'>

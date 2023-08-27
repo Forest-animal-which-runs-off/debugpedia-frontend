@@ -1,12 +1,16 @@
 import { Button, Center, Flex, Image, Input, Link, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useSignup } from '../../hooks/user/useSignup';
 
 export const Signup = () => {
   const [userName, setUserName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleSubmit = () => {};
+  const { trigger } = useSignup();
+  const handleSubmit = () => {
+    trigger({ name: userName, email, password });
+  };
 
   return (
     <Center bg='#5AEC16' h='100vh' w='100vw'>

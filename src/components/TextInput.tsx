@@ -15,27 +15,25 @@ const TextInput = (props: Props) => {
   };
 
   return (
-    <div>
+    <>
       {isEdit ? (
         <Box bg='white' w='100%' borderRadius='lg' boxShadow='lg' color='block' p={5} m={5}>
-          <Text fontWeight='bold' display='flex' ml='3px' p={3}>
+          <Text fontWeight='bold' display='flex' ml='3px' p={3} as='label'>
             {label}
           </Text>
           <Textarea value={value} onChange={handleChange} border='1px solid black' />
         </Box>
       ) : (
-        <>
-          <Box bg='white' w='100%' borderRadius='lg' boxShadow='lg' color='block' p={5} m={5}>
-            <Text fontWeight='bold' display='flex' ml='3px' p={3}>
-              {label}
-            </Text>
-            <Text display='flex' ml='3px' textAlign='left' minH='80px' p='8px 16px'>
-              {value}
-            </Text>
-          </Box>
-        </>
+        <Box bg='white' w='100%' borderRadius='lg' boxShadow='lg' color='block' p={5} m={5}>
+          <Text fontWeight='bold' display='flex' ml='3px' p={3}>
+            {label}
+          </Text>
+          <Text display='flex' ml='3px' textAlign='left' minH='80px' p='8px 16px'>
+            {value}
+          </Text>
+        </Box>
       )}
-    </div>
+    </>
   );
 };
 

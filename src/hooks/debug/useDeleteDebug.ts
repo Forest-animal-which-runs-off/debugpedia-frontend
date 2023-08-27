@@ -1,17 +1,22 @@
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
+import { useEffect } from 'react';
 import useSWRMutation from 'swr/mutation';
-import { Debug } from '../../types';
 
-const fetcher = async (debug: Debug) => {
-  await axios.delete(`${import.meta.env.VITE_APP_API_URL}/debugs/${debug.id}`);
+type Arg = {
+  debugId: string;
 };
 
-export const useDeleteDebug = (debug: Debug) => {
+const fetcher = async (_: string, { arg }: { arg: Arg }) => {
+  await axios.delete(`${import.meta.env.VITE_APP_API_URL}/debugs/${arg.debugId}`);
+};
+
+export const useDeleteDebug = () => {
   const toast = useToast();
 
-  return useSWRMutation('api/delete/debugs', () => fetcher(debug), {
+  const { trigger, isMutating } = useSWRMutation(`api/delete/debugs`, fetcher, {
     onSuccess: () => {
+      toast.closeAll();
       toast({
         title: 'デバッグの削除に成功しました。',
         status: 'success',
@@ -19,16 +24,35 @@ export const useDeleteDebug = (debug: Debug) => {
     },
     onError: (e) => {
       if (e instanceof Error) {
+        toast.closeAll();
         toast({
           title: e.message,
           status: 'error',
+          position: 'top-right',
+          duration: 2000,
         });
       } else {
+        toast.closeAll();
         toast({
           title: 'デバッグの更新に失敗しました。',
           status: 'error',
+          position: 'top-right',
         });
       }
     },
   });
+
+  useEffect(() => {
+    if (isMutating) {
+      toast({
+        title: '削除中...',
+        status: 'info',
+        duration: null,
+        isClosable: false,
+        position: 'top-right',
+      });
+    }
+  }, [isMutating]);
+
+  return { trigger, isMutating };
 };

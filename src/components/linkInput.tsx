@@ -1,18 +1,29 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { Box, Button, VStack, Stack, HStack, Text, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  VStack,
+  Stack,
+  HStack,
+  Text,
+  Input,
+  Link,
+  ListItem,
+  UnorderedList,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 
 type Props = {
   links: string[];
-  onChange: () => void;
+  setDebug: (links: string[]) => void;
   isEdit: boolean;
 };
 
 function LinkInput(props: Props) {
-  const [links, setLinks] = useState(props.links.map((link) => ({ link })));
+  const [links, setLinks] = useState(props.links);
 
   const addLink = () => {
-    setLinks([...links, { link: '' }]);
+    setLinks((prev) => [...prev, '']);
   };
 
   const removeLink = (index: number) => {
@@ -22,8 +33,9 @@ function LinkInput(props: Props) {
 
   const handleLinkChange = (index: number, value: string) => {
     const updatedLinks = [...links];
-    updatedLinks[index].link = value;
+    updatedLinks[index] = value;
     setLinks(updatedLinks);
+    props.setDebug(links);
   };
 
   return (
@@ -44,7 +56,7 @@ function LinkInput(props: Props) {
                 <Input
                   width='900px'
                   placeholder='リンク、記事を入力'
-                  value={link.link}
+                  value={link}
                   onChange={(e) => handleLinkChange(index, e.target.value)}
                   disabled={!props.isEdit}
                 />
@@ -55,7 +67,13 @@ function LinkInput(props: Props) {
                 )}
               </>
             ) : (
-              <link>{link.link}</link>
+              <UnorderedList>
+                <ListItem mt='2'>
+                  <Link isExternal href={link}>
+                    {link}
+                  </Link>
+                </ListItem>
+              </UnorderedList>
             )}
           </HStack>
         ))}

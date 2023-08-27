@@ -55,7 +55,7 @@ function LinkInput(props: Props) {
                 )}
               </>
             ) : (
-              <Text>{link.link}</Text>
+              <link>{link.link}</link>
             )}
           </HStack>
         ))}

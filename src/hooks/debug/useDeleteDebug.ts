@@ -1,31 +1,28 @@
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import useSWRMutation from 'swr/mutation';
 
 type Arg = {
-  name: string;
-  email: string;
-  password: string;
+  debugId: string;
 };
 
 const fetcher = async (_: string, { arg }: { arg: Arg }) => {
-  await axios.post(`${import.meta.env.VITE_APP_API_URL}/signup`, arg);
+  await axios.delete(`${import.meta.env.VITE_APP_API_URL}/debugs/${arg.debugId}`);
 };
 
-export const useSignup = () => {
+export const useDeleteDebug = () => {
   const toast = useToast();
-  const navigate = useNavigate();
 
-  const { trigger, isMutating } = useSWRMutation('api/post/signup', fetcher, {
+  const { trigger, isMutating } = useSWRMutation(`api/delete/debugs`, fetcher, {
     onSuccess: () => {
       toast.closeAll();
       toast({
-        title: 'ユーザーの登録に成功しました。',
+        title: 'デバッグの削除に成功しました。',
         status: 'success',
+        position: 'top-right',
+        duration: 2000,
       });
-      navigate('/debugs');
     },
     onError: (e) => {
       if (e instanceof Error) {
@@ -34,12 +31,11 @@ export const useSignup = () => {
           title: e.message,
           status: 'error',
           position: 'top-right',
-          duration: 2000,
         });
       } else {
         toast.closeAll();
         toast({
-          title: 'ユーザーの登録に失敗しました。',
+          title: 'デバッグの更新に失敗しました。',
           status: 'error',
           position: 'top-right',
         });
@@ -50,7 +46,7 @@ export const useSignup = () => {
   useEffect(() => {
     if (isMutating) {
       toast({
-        title: '登録中...',
+        title: '削除中...',
         status: 'info',
         duration: null,
         isClosable: false,

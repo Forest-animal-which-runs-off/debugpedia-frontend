@@ -50,7 +50,7 @@ export const useSignup = () => {
   useEffect(() => {
     if (isMutating) {
       toast({
-        title: 'ログイン中...',
+        title: '登録中...',
         status: 'info',
         duration: null,
         isClosable: false,

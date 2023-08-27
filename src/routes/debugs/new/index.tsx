@@ -8,7 +8,7 @@ import TextInput from '../../../components/TextInput';
 export const DebugNewPage = () => {
   const [isEdit, setEdit] = useState(true);
   const [text, setText] = useState('');
-  const [links, setLinks] = useState<string[]>([""]);
+  const [links, setLinks] = useState<string[]>(['']);
   // const [techs, setTechs] = useState<string[]>([]);
 
   const handleTextChange = (value: string) => {
@@ -33,7 +33,7 @@ export const DebugNewPage = () => {
         {/* <TechInput techs={techs} onChange={handleTechChange} isEdit={isEdit} /> */}
         <Button onClick={() => setEdit((prev) => !prev)}>Toggle Edit</Button>
       </Flex>
-      </>
+    </>
   );
 };
 

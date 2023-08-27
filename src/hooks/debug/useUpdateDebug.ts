@@ -2,23 +2,24 @@ import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import useSWRMutation from 'swr/mutation';
-import { DebugRequest } from './../../types/index';
+import { DebugRequest } from '../../types';
 
 type Arg = {
+  debugId: string;
   debug: DebugRequest;
 };
 
 const fetcher = async (_: string, { arg }: { arg: Arg }) => {
-  await axios.post(`${import.meta.env.VITE_APP_API_URL}/debugs`, arg.debug);
+  await axios.put(`${import.meta.env.VITE_APP_API_URL}/debugs/${arg.debugId}`, arg.debug);
 };
 
-export const useCreateDebug = () => {
+export const useUpdateDebug = () => {
   const toast = useToast();
 
-  const { trigger, isMutating } = useSWRMutation('api/post/debugs', fetcher, {
+  const { trigger, isMutating } = useSWRMutation('api/put/debugs', fetcher, {
     onSuccess: () => {
       toast({
-        title: 'デバッグの作成に成功しました。',
+        title: 'デバッグの更新に成功しました。',
         status: 'success',
         position: 'top-right',
         duration: 2000,
@@ -33,7 +34,7 @@ export const useCreateDebug = () => {
         });
       } else {
         toast({
-          title: 'デバッグの作成に失敗しました。',
+          title: 'デバッグの更新に失敗しました。',
           status: 'error',
           position: 'top-right',
         });
@@ -44,7 +45,7 @@ export const useCreateDebug = () => {
   useEffect(() => {
     if (isMutating) {
       toast({
-        title: '作成中...',
+        title: '更新中...',
         status: 'info',
         duration: null,
         isClosable: false,

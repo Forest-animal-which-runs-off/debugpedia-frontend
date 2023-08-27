@@ -9,11 +9,13 @@ const fetcher = async () => {
 export const useDeleteDebug = () => {
   const toast = useToast();
 
-  return useSWR('api/get/debugs', () => fetcher(), {
+  const { data, error, isLoading } = useSWR('api/get/debugs', () => fetcher(), {
     onSuccess: () => {
       toast({
         title: 'デバッグの取得に成功しました。',
         status: 'success',
+        position: 'top-right',
+        duration: 2000,
       });
     },
     onError: (e) => {
@@ -21,13 +23,16 @@ export const useDeleteDebug = () => {
         toast({
           title: e.message,
           status: 'error',
+          position: 'top-right',
         });
       } else {
         toast({
           title: 'デバッグの更新に失敗しました。',
           status: 'error',
+          position: 'top-right',
         });
       }
     },
   });
+  return { data, error, isLoading };
 };

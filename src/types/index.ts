@@ -14,3 +14,12 @@ export type Credential = {
   email: string;
   password: string;
 };
+
+export type DebugRequest = {
+  title: string;
+  body: string;
+  links: string[];
+  techs: string[];
+  cause: string;
+  resolve: string;
+};

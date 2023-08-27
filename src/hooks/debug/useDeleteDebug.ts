@@ -20,6 +20,8 @@ export const useDeleteDebug = () => {
       toast({
         title: 'デバッグの削除に成功しました。',
         status: 'success',
+        position: 'top-right',
+        duration: 2000,
       });
     },
     onError: (e) => {
@@ -29,7 +31,6 @@ export const useDeleteDebug = () => {
           title: e.message,
           status: 'error',
           position: 'top-right',
-          duration: 2000,
         });
       } else {
         toast.closeAll();

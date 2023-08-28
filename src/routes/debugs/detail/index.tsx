@@ -3,10 +3,10 @@ import { ChakraProvider, /*Spinner ,*/ Box, Button, /*, useToast*/ Flex } from '
 import { useState } from 'react';
 // import { useLocation } from "react-router-dom";
 import App from '../../../App';
+import LinkInput from '../../../components/LinkInput';
 import TechInput from '../../../components/TechsInput';
 import TextInput from '../../../components/TextInput';
 import { Header } from '../../../components/header';
-import LinkInput from '../../../components/linkInput';
 // import { useGetDebugById } from '../../../hooks/debug/useGetDebugById';
 // import { useDeleteDebug } from '../../../hooks/debug/useDeleteDebug';
 // import { useUpdateDebug } from '../../../hooks/debug/useUpdateDebug';

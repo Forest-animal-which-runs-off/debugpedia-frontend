@@ -1,5 +1,5 @@
 export type Debug = {
-  id: number;
+  id: string;
   title: string;
   body: string;
   links: string[];

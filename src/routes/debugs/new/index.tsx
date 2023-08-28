@@ -1,4 +1,4 @@
-import { Button, Flex ,Link as ChakraLink} from '@chakra-ui/react';
+import { Button, Flex, Link as ChakraLink } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LinkInput from '../../../components/LinkInput';
@@ -64,10 +64,17 @@ export const DebugNewPage = () => {
           onChange={handleSolutionChange}
           isEdit={isEdit}
         />
-      <ChakraLink as={Link} to="/some-path"display={'block'} width='fit-content' > {/*to='../index.tsx'*/}
-        <Button  mb="40" backgroundColor='#5AEC16' color='white' onClick={() => setEdit((prev) => !prev)}>
-          新規作成
-        </Button>
+        <ChakraLink as={Link} to='/some-path' display={'block'} width='fit-content'>
+          {' '}
+          {/*to='../index.tsx'*/}
+          <Button
+            mb='40'
+            backgroundColor='#5AEC16'
+            color='white'
+            onClick={() => setEdit((prev) => !prev)}
+          >
+            新規作成
+          </Button>
         </ChakraLink>
       </Flex>
     </>

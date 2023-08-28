@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import { ErrorPage } from './error-page.tsx';
 import { Debugs } from './routes/debug/index.tsx';
+import { DebugCardList } from './routes/debugs/index.tsx';
 import { Login } from './routes/login/index.tsx';
 import { Signup } from './routes/signup/index.tsx';
 
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
   {
     path: '/debugs',
     element: <Debugs />,
+  },
+  {
+    path: '/debugs',
+    element: <DebugCardList />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

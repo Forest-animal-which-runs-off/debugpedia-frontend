@@ -1,7 +1,14 @@
-import { EditIcon } from '@chakra-ui/icons';
-import { ChakraProvider, /*Spinner ,*/ Box, Button /*, useToast*/ } from '@chakra-ui/react';
+import { EditIcon, NotAllowedIcon } from '@chakra-ui/icons';
+import {
+  ChakraProvider,
+  /*Spinner ,*/ Box,
+  Button,
+  /*, useToast*/ Flex,
+  Link as ChakraLink,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 // import { useLocation } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import App from '../../../App';
 import TechInput from '../../../components/TechsInput';
 import TextInput from '../../../components/TextInput';
@@ -126,7 +133,7 @@ export const DetailDebug = () => {
   return (
     <ChakraProvider>
       <Header />
-      <Box>
+      <Box p={10}>
         {!isEdit && (
           <Button
             onClick={() => handleEdit()}
@@ -148,35 +155,43 @@ export const DetailDebug = () => {
             colorScheme='white'
             width='112px'
             height='40px'
-            leftIcon={<EditIcon />}
+            leftIcon={<NotAllowedIcon />}
           >
             キャンセル
           </Button>
         )}
       </Box>
-      <TextInput label='タイトル' value={title} onChange={handleTitleChange} isEdit={isEdit} />
-      <TextInput label='エラー本文' value={body} onChange={handleBodyChange} isEdit={isEdit} />
-      <LinkInput links={links} setDebug={handleLinksChange} isEdit={isEdit} />
-      <TechInput techs={techs} setDebug={handleTechsChange} isEdit={isEdit} />
-      <TextInput label='エラーの原因' value={cause} onChange={handleCauseChange} isEdit={isEdit} />
-      <TextInput
-        label='どうやって解決したか'
-        value={resolve}
-        onChange={handleResolveChange}
-        isEdit={isEdit}
-      />
-      {isEdit && (
-        <Button
-          onClick={() => handleEdit()}
-          /*isLoading={isMutating}*/ bg='#5AEC16'
-          display='flex'
-          colorScheme='white'
-          width='112px'
-          height='40px'
-        >
-          変更を保存
-        </Button>
-      )}
+      <Flex direction='column' align='center' p={4}>
+        <TextInput label='タイトル' value={title} onChange={handleTitleChange} isEdit={isEdit} />
+        <TextInput label='エラー本文' value={body} onChange={handleBodyChange} isEdit={isEdit} />
+        <LinkInput links={links} setDebug={handleLinksChange} isEdit={isEdit} />
+        <TechInput techs={techs} setDebug={handleTechsChange} isEdit={isEdit} />
+        <TextInput
+          label='エラーの原因'
+          value={cause}
+          onChange={handleCauseChange}
+          isEdit={isEdit}
+        />
+        <TextInput
+          label='どうやって解決したか'
+          value={resolve}
+          onChange={handleResolveChange}
+          isEdit={isEdit}
+        />
+        <ChakraLink as={Link} to='/some-path' display={'block'} width='fit-content'>
+          {isEdit && (
+            <Button
+              onClick={() => handleEdit()}
+              /*isLoading={isMutating}*/ bg='#5AEC16'
+              colorScheme='white'
+              width='112px'
+              height='40px'
+            >
+              変更を保存
+            </Button>
+          )}
+        </ChakraLink>
+      </Flex>
     </ChakraProvider>
   );
 };

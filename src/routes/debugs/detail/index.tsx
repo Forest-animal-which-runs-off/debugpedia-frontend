@@ -1,14 +1,7 @@
 import { EditIcon, NotAllowedIcon } from '@chakra-ui/icons';
-import {
-  ChakraProvider,
-  /*Spinner ,*/ Box,
-  Button,
-  /*, useToast*/ Flex,
-  Link as ChakraLink,
-} from '@chakra-ui/react';
+import { ChakraProvider, /*Spinner ,*/ Box, Button, /*, useToast*/ Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 // import { useLocation } from "react-router-dom";
-import { Link } from 'react-router-dom';
 import App from '../../../App';
 import TechInput from '../../../components/TechsInput';
 import TextInput from '../../../components/TextInput';
@@ -178,19 +171,18 @@ export const DetailDebug = () => {
           onChange={handleResolveChange}
           isEdit={isEdit}
         />
-        <ChakraLink as={Link} to='/some-path' display={'block'} width='fit-content'>
-          {isEdit && (
-            <Button
-              onClick={() => handleEdit()}
-              /*isLoading={isMutating}*/ bg='#5AEC16'
-              colorScheme='white'
-              width='112px'
-              height='40px'
-            >
-              変更を保存
-            </Button>
-          )}
-        </ChakraLink>
+
+        {isEdit && (
+          <Button
+            onClick={() => handleEdit()}
+            /*isLoading={isMutating}*/ bg='#5AEC16'
+            colorScheme='white'
+            width='112px'
+            height='40px'
+          >
+            変更を保存
+          </Button>
+        )}
       </Flex>
     </ChakraProvider>
   );
